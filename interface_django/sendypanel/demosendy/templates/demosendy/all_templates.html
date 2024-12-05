@@ -1,0 +1,152 @@
+{%extends 'demosendy/base.html'%}
+{%block title%}Templates{%endblock%}
+{%block content%}
+
+<div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+    <!--begin::Content wrapper-->
+    <div class="d-flex flex-column flex-column-fluid">
+        <!--begin::Content-->
+        <div id="kt_app_content" class="app-content flex-column-fluid">
+            <!--begin::Content container-->
+            <div id="kt_app_content_container" class="app-container container-fluid">
+                <!--begin::Row-->
+                <div class="app-toolbar-wrapper d-flex flex-stack flex-wrap gap-2 w-100 mb-6">
+                    <!--begin::Page title-->
+                    <div class="page-title d-flex flex-column justify-content-center gap-1 me-3">
+                        <!--begin::Title-->
+                        
+                        <!--end::Title-->
+                    </div>
+                    <!--end::Page title-->
+                    <!--begin::Actions-->
+                    <div class="d-flex btn-action flex-wrap align-items-center gap-2 gap-lg-3">
+
+                        <a href="{% url 'create_template' %}"
+                            class="btn min-w-175px btn-flex btn-primary h-40px fs-14 fw-bold text-center justify-content-center "
+                            >
+                            <span class="me-2">
+                                <svg fill="#fff" height="20px" width="20px" version="1.1" id="Layer_1"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512"
+                                    xml:space="preserve">
+                                    <g>
+                                        <g>
+                                            <path d="M256,0C114.84,0,0,114.842,0,256s114.84,256,256,256s256-114.842,256-256S397.16,0,256,0z M256,462.452
+                                        c-113.837,0-206.452-92.614-206.452-206.452S142.163,49.548,256,49.548S462.452,142.163,462.452,256S369.837,462.452,256,462.452z
+                                        " />
+                                        </g>
+                                    </g>
+                                    <g>
+                                        <g>
+                                            <polygon points="280.774,231.226 280.774,140.387 231.226,140.387 231.226,231.226 140.387,231.226 140.387,280.774 
+                                        231.226,280.774 231.226,371.613 280.774,371.613 280.774,280.774 371.613,280.774 371.613,231.226 		" />
+                                        </g>
+                                    </g>
+                                </svg>
+                            </span>
+                            Create a new
+                            Template</a>
+                       
+                    </div>
+                    <!--end::Actions-->
+                </div>
+                <!--end::Row-->
+
+                <div class="card mb-5 mb-xl-8">
+                    <div
+                        class="card-header flex-wrap table-header py-2 min-h-auto px-4 align-items-center  p-0">
+                        <h3 class="mb-3  mb-lg-0 align-items-start flex-column">
+                            <span class="card-label fw-bold fs-5 text-black">All Templates</span>
+                        </h3>
+                        <div class="d-flex flex-wrap align-items-center gap-6">
+                            <div class="custom-sort d-flex">
+                                <label
+                                    class="fs-14 align-items-center d-flex text-black-light me-3">Sort
+                                    by</label>
+                                <div>
+                                    <select id="sortDropdown"
+                                        class="form-select form-select form-select-sm"
+                                        data-control="select2" data-hide-search="true">
+                                        <option value="desc">Newest to Oldest</option>
+                                        <option value="asc">Oldest to Newest</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div
+                                class="custom-search d-flex flex-row-reverse align-items-center position-relative mb-3 mb-lg-0">
+                                <input id="customSearchBox" type="text"
+                                    data-kt-inbox-listing-filter="search"
+                                    class="form-control form-control-sm form-control min-h-auto pe-11 min-w-lg-400px"
+                                    placeholder="Search by Template Name">
+                                <i class="ki-outline ki-magnifier fs-3 position-absolute me-4"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body p-0 mt-4">
+                        <div class="table-responsive min-h-350px">
+                            <table id="kt_datatable_zero_configuration"
+                                class="table table-bordered  gy-5">
+                                <thead>
+                                    <tr class="fw-semibold fs-6 text-muted">
+                                        {% comment %} <th class="text-center min-w-lg-60px min-w-60px">SL No</th> {% endcomment %}
+                                        {% comment %} <th class="min-w-100px">Template ID</th> {% endcomment %}
+                                        <th class="min-w-150px">Template Name</th>
+                                        {% comment %} <th class="min-w-100px">Preview</th>
+                                        <th class="min-w-100px">Category</th>
+                                        <th class="min-w-100px">Language</th> {% endcomment %}
+                                        <th class="min-w-100px">Date/Time</th>
+                                        <th class="min-w-150px">Edit</th>
+                                        <th class="min-w-100px">Delete</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {%for template in templates%}
+                                    <tr>
+                                        {% comment %} <td class="text-center">{{forloop.counter}}</td> {% endcomment %}
+                                        {% comment %} <td>{{template.id}}</td> {% endcomment %}
+                                        <td><span class="fs-14 fw-bold text-primary">{{template.template_name}}</span></td>
+                                        <td>{{template.created_at}}</td>
+                                        <td><i class="bi bi-pencil-square"></i></td>
+                                        <td><i class="bi bi-archive-fill"></i></td>
+                                        <td></td>
+                                    </tr>
+                                    {% endfor %}
+                                    {% comment %} <tr>
+                                        <td class="text-center">2</td>
+                                        <td>258</td>
+                                        <td><span class="fs-14 fw-bold text-primary">Template2</span></td>
+                                        <td>2024-05-24 15:03:24</td>
+                                        <td>--------</td>
+                                        <td>--------</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">3</td>
+                                        <td>255</td>
+                                        <td><span class="fs-14 fw-bold text-primary">Template3</span></td>
+                                        <td>2024-05-24 15:03:24</td>
+                                        <td>--------</td>
+                                        <td>--------</td>
+                                    </tr> {% endcomment %}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+
+
+            </div>
+            <!--end::Content container-->
+        </div>
+        <!--end::Content-->
+    </div>
+
+</div>
+{%endblock%}
